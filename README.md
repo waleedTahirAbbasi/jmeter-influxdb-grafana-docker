@@ -1,30 +1,79 @@
-# 🚀 JMeter Live Monitoring Stack
-
-A plug-and-play solution to visualize Apache JMeter performance test results in real-time using **InfluxDB** and **Grafana**. 
-
-Stop relying on static spreadsheets and raw logs. This stack allows you to monitor response times, error rates, and throughput as they happen.
+🚀 JMeter Live Monitoring Stack
+This repository provides a "plug-and-play" infrastructure to transform raw JMeter results into professional, real-time dashboards using InfluxDB and Grafana.
 
 ---
 
-## 📖 Overview
+## ✅ Overview
 
-This setup uses a "Time-Series" approach to performance monitoring:
-1. **JMeter** generates the load and streams metrics.
-2. **InfluxDB (1.8)** stores the metrics in a time-series database.
-3. **Grafana** queries InfluxDB to display beautiful, live dashboards.
+This setup allows you to:
 
-### Why use this?
-* **Real-time Insights:** Catch 429 (Too Many Requests) or 500 errors the second they spike.
-* **Stakeholder Ready:** Professional dashboards for high-level summaries.
-* **Comparison:** Easily compare different test runs (baselines) side-by-side.
+- Run **JMeter performance tests**
+- Automatically push live metrics to **InfluxDB**
+- Visualize results in **Grafana dashboards**
+- Monitor performance in real time during test execution
+
+### Why this stack?
+
+| Tool | Purpose |
+|------|--------|
+| JMeter | Load generation & performance testing |
+| InfluxDB | Time-series metrics storage |
+| Grafana | Real-time dashboards & visualization |
+
+This architecture gives you:
+
+- Live performance feedback
+- Historical trend analysis
+- Shareable dashboards
+- Production-like observability
 
 ---
 
-## 🏗 Architecture
+## ✅ Architecture
 
-```text
-[ JMeter ]  ---- (Write Metrics) ----> [ InfluxDB 1.8 ]
-    |                                       |
-    | (Simulate Load)                       | (Query Data)
-    v                                       v
-[ Target App ]                       [ Grafana Dashboard ]
+    JMeter Test
+        |
+        v
+ Backend Listener
+        |
+        v
+    InfluxDB
+        |
+        v
+     Grafana
+  (Dashboards)
+
+
+Flow:
+
+1. JMeter executes load test
+2. Backend Listener sends metrics to InfluxDB
+3. Grafana reads metrics from InfluxDB
+4. Dashboards visualize performance in real time
+
+---
+
+## ✅ Prerequisites
+
+Install the following:
+
+- Docker ≥ 20.x
+- Docker Compose ≥ v2
+- JMeter ≥ 5.5 (installed locally)
+
+### Ports used
+
+| Service | Port |
+|--------|------|
+| InfluxDB | 8086 |
+| Grafana | 3000 |
+
+Make sure these ports are free.
+
+### System requirements
+
+- 4 GB RAM minimum
+- 2 CPU cores recommended
+- Linux / macOS / Windows supported
+
+---
